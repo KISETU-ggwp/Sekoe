@@ -17,11 +17,13 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
+//呼びかけはボタンを押すようにUserに指示する。
 // DOMが完全にロードされたらイベントリスナーを設定
 document.addEventListener('DOMContentLoaded', () => {
   // 発話ボタンにイベントリスナーを設定
   document.getElementById("bms_send_btn_voice").addEventListener("click", speak);
+
+
 });
 // 発話機能
 function speak() {
@@ -31,5 +33,23 @@ function speak() {
   mp3.play();
 }
 
+//Funayama開発
+document.addEventListener('DOMContentLoaded', () => {
+  // テキストエリアにイベントリスナーを設定
+  const textarea = document.getElementById("sample");
+  textarea.addEventListener("keyup", function(e) {
+    // Enterキーが押されたら
+    if (e.shiftKey && e.key === 'Enter') {
+      // テキストを読み上げる
+      speak(textarea.value);
+    }
+  });
+});
 
-
+// テキストを読み上げる関数
+function speak(text) {
+  // SpeechSynthesisUtterance オブジェクトを作成
+  const utterance = new SpeechSynthesisUtterance(text);
+  // テキストを読み上げる
+  window.speechSynthesis.speak(utterance);
+}
