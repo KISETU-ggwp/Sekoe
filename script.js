@@ -18,4 +18,18 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// DOMが完全にロードされたらイベントリスナーを設定
+document.addEventListener('DOMContentLoaded', () => {
+  // 発話ボタンにイベントリスナーを設定
+  document.getElementById("bms_send_btn_voice").addEventListener("click", speak);
+});
+// 発話機能
+function speak() {
+  // 発話する MP3ファイルを指定
+  const mp3 = new Audio("src/sumimasen_ima_daizyobudesuka.mp3");
+  // 発話する
+  mp3.play();
+}
+
+
 

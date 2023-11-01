@@ -104,7 +104,29 @@ textarea {
       border-radius: 4px;/*角丸*/
       box-sizing: border-box;/*paddingとborderの要素の高さと幅の影響をなくす（要素に高さと幅を含める）*/
   }
+#bms_send_btn_voice {
+    width: 72px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 3em;
+    position: relative;
+    left: 550px;
+    top: -100px;
+    color: #fff;
+    font-weight: bold;
+    background: #bcbcbc;
+    text-align: center;/*文字をボタン中央に表示*/
+    border: 1px solid #bbb;
+    border-radius: 4px;/*角丸*/
+    box-sizing: border-box;/*paddingとborderの要素の高さと幅の影響をなくす（要素に高さと幅を含める）*/
+}
+
 #bms_send_btn:hover {
       background: #13178E; /*マウスポインタを当てた時にアクティブな色になる*/
       cursor: pointer;/*マウスポインタを当てた時に、カーソルが指の形になる*/
   }
+
+#bms_send_btn_voice:hover {
+    background: #13178E; /*マウスポインタを当てた時にアクティブな色になる*/
+    cursor: pointer;/*マウスポインタを当てた時に、カーソルが指の形になる*/
+}
