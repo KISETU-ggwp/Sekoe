@@ -17,21 +17,6 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//呼びかけはボタンを押すようにUserに指示する。
-// DOMが完全にロードされたらイベントリスナーを設定
-document.addEventListener('DOMContentLoaded', () => {
-  // 発話ボタンにイベントリスナーを設定
-  document.getElementById("bms_send_btn_voice").addEventListener("click", speak);
-
-
-});
-// 発話機能
-function speak() {
-  // 発話する MP3ファイルを指定
-  const mp3 = new Audio("src/sumimasen_ima_daizyobudesuka.mp3");
-  // 発話する
-  mp3.play();
-}
 
 //Funayama開発
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,7 +34,38 @@ document.addEventListener('DOMContentLoaded', () => {
 // テキストを読み上げる関数
 function speak(text) {
   // SpeechSynthesisUtterance オブジェクトを作成
+
   const utterance = new SpeechSynthesisUtterance(text);
+
+  //utterance.lang = "ja-JP";
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
+
+
+
+
+// DOMが完全にロードされたらイベントリスナーを設定
+document.addEventListener('DOMContentLoaded', function() {
+  // 発話ボタンにクリックイベントリスナーを設定
+  var playButton = document.getElementById("bms_send_btn_voice"); // playButtonに変数名を更新
+  if (playButton) { // ボタンの存在をチェック
+    playButton.addEventListener("click", function() {
+      // Audioインスタンスを作成し、ファイルを指定
+      var audio = new Audio('sumimasen_ima_daizyobudesuka.mp3');
+
+      // 音声を再生
+      audio.play().catch(function(e) {
+        console.error('音声再生に失敗しました。', e);
+      });
+    });
+  } else {
+    console.error("ボタンがDOMに存在しません。"); // ボタンが見つからない場合のエラーメッセージ
+  }
+});
+//マジで俺髪の分け目がやばくて草(船山)
+
+
+
+
+
