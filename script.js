@@ -18,15 +18,25 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-//Funayama開発
+// Funayama開発
 document.addEventListener('DOMContentLoaded', () => {
   // テキストエリアにイベントリスナーを設定
   const textarea = document.getElementById("sample");
+
   textarea.addEventListener("keyup", function(e) {
-    // Enterキーが押されたら
-    if (e.shiftKey && e.key === 'Enter') {
+    // テキストエリアの値から最後の文字を取得
+    let lastChar = textarea.value.slice(-1);
+    let punctuationMarks = ['。', '、', '.',',']; // 日本語の句点と読点、英語のピリオド
+    let isPunctuation = punctuationMarks.includes(lastChar);
+
+    // Enterがクリックされるかまたは最後の文字が句読点のいずれかである場合に発話する
+    if (e.key === 'Enter' || isPunctuation) {
       // テキストを読み上げる
       speak(textarea.value);
+      // 読み上げたテキストをクリア
+      textarea.value = '';
+      // デフォルトのイベントをキャンセル（改行の挿入を防ぐ）
+      e.preventDefault();
     }
   });
 });
@@ -34,13 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // テキストを読み上げる関数
 function speak(text) {
   // SpeechSynthesisUtterance オブジェクトを作成
-
   const utterance = new SpeechSynthesisUtterance(text);
-
-  //utterance.lang = "ja-JP";
+  utterance.lang = "ja-JP"; // 言語設定を日本語に設定
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
+
+
+
+
 
 
 
