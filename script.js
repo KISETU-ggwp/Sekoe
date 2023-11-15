@@ -1,3 +1,8 @@
+//チャットを保存する配列。触れることを禁ずる。
+// let chat_log1 = [];
+// let chat_log2 = [];
+let chat_log = [];
+
 // 自動で入力欄サイズを変更する
 window.addEventListener("DOMContentLoaded", () => {
   // textareaタグを全て取得
@@ -18,7 +23,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Funayama開発
+// 入力されたテキストを自動で削除する
 document.addEventListener('DOMContentLoaded', () => {
   // テキストエリアにイベントリスナーを設定
   const textarea = document.getElementById("sample");
@@ -33,13 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter' || isPunctuation) {
       // テキストを読み上げる
       speak(textarea.value);
+      //チャットを保存する
+      saveChat(textarea.value);
       // 読み上げたテキストをクリア
-      textarea.value = '';
+      textarea.value = "";
       // デフォルトのイベントをキャンセル（改行の挿入を防ぐ）
       e.preventDefault();
+      
     }
   });
 });
+
+
+//チャットを保存する関数
+function saveChat(text){
+  //テキストを保存する
+  chat_log.push(text);
+  //chat_logを表示する
+  document.getElementById("chat_log").textContent = chat_log;
+}
 
 // テキストを読み上げる関数
 function speak(text) {
@@ -49,12 +66,6 @@ function speak(text) {
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
-
-
-
-
-
-
 
 
 // DOMが完全にロードされたらイベントリスナーを設定
@@ -78,6 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
 //マジで俺髪の分け目がやばくて草(船山)
 
 
-
+//ログに残す文章数を取得する
+function clickBtn(){
+  const index = document.getElementById("index_select").value;
+  document.getElementById("select_index").textContent = index;
+}
 
 
