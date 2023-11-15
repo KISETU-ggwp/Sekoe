@@ -55,6 +55,26 @@
   <p>選択した文章数 <span id="select_index"></span></p>
   <p>保存した文 <span id="chat_log"></span></p>
   <textarea id="sample" name="sample" placeholder="ここにテキストを入力して、Enterを押すか句読点入力で読み上げを開始。"></textarea>
+  <label for="index_select">ログを残しておきたい文章数を決めてください。
+  </label>
+  <select name="Count_index" id="index_select">
+    <option vaule="">--文章数--</option>
+    <option vaule="1">1</option>
+    <option vaule="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+  <input type="button" value="設定する" onclick="clickBtn()" />
+  <br>
+  <p>選択した文章数 <span id="select_index"></span></p>
+  <p>保存した文 <span id="chat_log"></span></p>
+  <textarea id="sample" name="sample" placeholder="ここにテキストを入力して、Enterを押すか句読点入力で読み上げを開始。"></textarea>
 
   <!--呼びかけ発出をするボタン実装(お祈り)-->
   <div id="bms_send_btn_voice">発言</div>
