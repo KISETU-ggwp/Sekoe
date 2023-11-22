@@ -2,6 +2,7 @@
 // let chat_log1 = [];
 // let chat_log2 = [];
 let chat_log = [];
+let index;
 
 // 自動で入力欄サイズを変更する
 window.addEventListener("DOMContentLoaded", () => {
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //表示する文字列を残す
 let current_text = ""; // 現在のテキストを蓄積する変数
 
-function saveChat(text){
+function saveChat(text) {
   let period_marks = ['。', '.']; // 日本語の句点と英語のピリオド
   current_text += text; // 新しいテキストを蓄積
 
@@ -61,10 +62,12 @@ function saveChat(text){
     chat_log.push(current_text); // 蓄積されたテキストを配列に保存
     current_text = ""; // 蓄積されたテキストをリセット
   }
-
+  let lastThree = chat_log.slice(-(index));
   // chat_logを<br>タグで結合して表示
-  document.getElementById("chat_log").innerHTML = chat_log.join("<br>");
+  document.getElementById("chat_log").innerHTML = lastThree.join("<br>");
 }
+
+
 
 // テキストを読み上げる関数
 function speak(text) {
@@ -99,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //ログに残す文章数を取得する
 function clickBtn() {
-  const index = document.getElementById("index_select").value;
+  index = document.getElementById("index_select").value;
+  index = Number(index);
   document.getElementById("select_index").textContent = index;
 }
 
