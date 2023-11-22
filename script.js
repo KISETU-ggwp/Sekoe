@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   textarea.addEventListener("keyup", function(e) {
     // テキストエリアの値から最後の文字を取得
     let lastChar = textarea.value.slice(-1);
-    let punctuationMarks = ['。', '、', '.',',']; // 日本語の句点と読点、英語のピリオド
+    let punctuationMarks = ['。', '、', '.', ',']; // 日本語の句点と読点、英語のピリオド
     let isPunctuation = punctuationMarks.includes(lastChar);
 
     // Enterがクリックされるかまたは最後の文字が句読点のいずれかである場合に発話する
@@ -44,18 +44,26 @@ document.addEventListener('DOMContentLoaded', () => {
       textarea.value = "";
       // デフォルトのイベントをキャンセル（改行の挿入を防ぐ）
       e.preventDefault();
-      
+
     }
   });
 });
 
+//表示する文字列を残す
+let current_text = ""; // 現在のテキストを蓄積する変数
 
-//チャットを保存する関数
 function saveChat(text){
-  //テキストを保存する
-  chat_log.push(text);
-  //chat_logを表示する
-  document.getElementById("chat_log").textContent = chat_log;
+  let period_marks = ['。', '.']; // 日本語の句点と英語のピリオド
+  current_text += text; // 新しいテキストを蓄積
+
+  let lastChar = current_text.slice(-1);
+  if (period_marks.includes(lastChar)) {
+    chat_log.push(current_text); // 蓄積されたテキストを配列に保存
+    current_text = ""; // 蓄積されたテキストをリセット
+  }
+
+  // chat_logを<br>タグで結合して表示
+  document.getElementById("chat_log").innerHTML = chat_log.join("<br>");
 }
 
 // テキストを読み上げる関数
@@ -90,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //ログに残す文章数を取得する
-function clickBtn(){
+function clickBtn() {
   const index = document.getElementById("index_select").value;
   document.getElementById("select_index").textContent = index;
 }
