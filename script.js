@@ -1,8 +1,8 @@
 //チャットを保存する配列。触れることを禁ずる。
-// let chat_log1 = [];
-// let chat_log2 = [];
 let chat_log = [];
 let index;
+//ユーザ設定定型文リスト
+let user_list = [];
 
 // 自動で入力欄サイズを変更する
 window.addEventListener("DOMContentLoaded", () => {
@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
 //表示する文字列を残す
 let current_text = ""; // 現在のテキストを蓄積する変数
 
@@ -66,7 +67,6 @@ function saveChat(text) {
   // chat_logを<br>タグで結合して表示
   document.getElementById("chat_log").innerHTML = lastThree.join("<br>");
 }
-
 
 
 // テキストを読み上げる関数
@@ -107,4 +107,28 @@ function clickBtn() {
   document.getElementById("select_index").textContent = index;
 }
 
+
+//テンプレの動きをしてする動きを決める
+function openwin() {
+  window.open("template.html", "", "width=400,height=200,top=600,left=600");
+}
+
+
+//定型文を読み上げる
+function tmpbutton(event) {
+  // SpeechSynthesisUtterance オブジェクトを作成
+  const utterance = new  SpeechSynthesisUtterance(event.target.value);
+  utterance.lang = "ja-JP"; // 言語設定を日本語に設定
+  // テキストを読み上げる
+  window.speechSynthesis.speak(utterance);
+}
+
+
+//設定した定型文を保存する
+function savetmp() {
+  const template = document.getElementById("newTemplateText").value;
+  user_list.push(template);
+  console.log(user_list);
+  document.getElementById("templateText").innerHTML =　user_list.join("<br>");
+}
 
