@@ -57,7 +57,7 @@ let current_text = ""; // 現在のテキストを蓄積する変数
 function saveChat(text) {
   let period_marks = ['。', '.']; // 日本語の句点と英語のピリオド
   current_text += text; // 新しいテキストを蓄積
-
+document.getElementById("current_text").innerHTML = current_text;
   let lastChar = current_text.slice(-1);
   if (period_marks.includes(lastChar)) {
     chat_log.push(current_text); // 蓄積されたテキストを配列に保存
@@ -117,18 +117,51 @@ function openwin() {
 //定型文を読み上げる
 function tmpbutton(event) {
   // SpeechSynthesisUtterance オブジェクトを作成
-  const utterance = new  SpeechSynthesisUtterance(event.target.value);
+  const utterance = new SpeechSynthesisUtterance(event.target.value);
   utterance.lang = "ja-JP"; // 言語設定を日本語に設定
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
 
-
 //設定した定型文を保存する
 function savetmp() {
-  const template = document.getElementById("newTemplateText").value;
-  user_list.push(template);
-  console.log(user_list);
-  document.getElementById("templateText").innerHTML =　user_list.join("<br>");
+  //テキストエリアから値を取得
+  var templateText = document.getElementById("addTemplate").value;
+
+  //ラジオボタンを生成して追加
+  var radioButtonsContainer = document.getElementById("radioButtonsContainer");
+  var radioButton = document.createElement("input");
+  radioButton.type = "radio";
+  radioButton.name = "template";
+  radioButton.value = templateText;
+  radioButtonsContainer.appendChild(radioButton);
+
+  //onchangeイベントハンドラを関数に直接割り当てる
+  radioButton.onchange = tmpbutton;
+  radioButtonsContainer.appendChild(radioButton);
+  
+  //ラジオボタンに対応するラベルを生成して追加
+  var label = document.createElement("label");
+  label.innerText = templateText;
+  radioButtonsContainer.appendChild(label);
+  
+  //削除ボタンを生成
+  var delButtonsContainer = document.getElementById("delButtonsContainer");
+  var delButton = document.createElement("input");
+  delButton.type = "button";
+  delButton.name = "delButton";
+  delButton.value = "X";
+  delButtonsContainer.appendChild(delButton);
+
+  //改行
+  var newline = document.createElement('br');
+  radioButtonsContainer.appendChild(newline);
+  
+  //textarea内容を自動的に消す
+  const textarea = document.getElementById("addTemplate");
+  
+  textarea.value = "";
 }
+
+
 
