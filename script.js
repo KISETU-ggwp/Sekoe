@@ -57,7 +57,7 @@ let current_text = ""; // 現在のテキストを蓄積する変数
 function saveChat(text) {
   let period_marks = ['。', '.']; // 日本語の句点と英語のピリオド
   current_text += text; // 新しいテキストを蓄積
-document.getElementById("current_text").innerHTML = current_text;
+  document.getElementById("current_text").innerHTML = current_text;
   let lastChar = current_text.slice(-1);
   if (period_marks.includes(lastChar)) {
     chat_log.push(current_text); // 蓄積されたテキストを配列に保存
@@ -74,6 +74,7 @@ function speak(text) {
   // SpeechSynthesisUtterance オブジェクトを作成
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "ja-JP"; // 言語設定を日本語に設定
+  utterance.rate = 0.7; // 読み上げの速さを0.7倍に設定
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
@@ -119,6 +120,7 @@ function tmpbutton(event) {
   // SpeechSynthesisUtterance オブジェクトを作成
   const utterance = new SpeechSynthesisUtterance(event.target.value);
   utterance.lang = "ja-JP"; // 言語設定を日本語に設定
+  utterance.rate = 0.7;
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
@@ -139,12 +141,12 @@ function savetmp() {
   //onchangeイベントハンドラを関数に直接割り当てる
   radioButton.onchange = tmpbutton;
   radioButtonsContainer.appendChild(radioButton);
-  
+
   //ラジオボタンに対応するラベルを生成して追加
   var label = document.createElement("label");
   label.innerText = templateText;
   radioButtonsContainer.appendChild(label);
-  
+
   //削除ボタンを生成
   var delButtonsContainer = document.getElementById("delButtonsContainer");
   var delButton = document.createElement("input");
@@ -156,12 +158,45 @@ function savetmp() {
   //改行
   var newline = document.createElement('br');
   radioButtonsContainer.appendChild(newline);
-  
+
   //textarea内容を自動的に消す
   const textarea = document.getElementById("addTemplate");
-  
+
   textarea.value = "";
 }
 
+// 各ボタンに対してイベントリスナーを追加
+document.getElementById('speakerButton1').addEventListener('click', function(e) {
+    readText(e);
+});
 
+document.getElementById('speakerButton2').addEventListener('click', function(e) {
+    readText(e);
+});
 
+document.getElementById('speakerButton3').addEventListener('click', function(e) {
+    readText(e);
+});
+
+document.getElementById('speakerButton4').addEventListener('click', function(e) {
+    readText(e);
+});
+
+// テキストを読み上げる関数
+function readText(e) {
+    // クリックされたボタンのidを取得
+    var buttonId = e.target.id;
+
+    // 対応するテキスト要素のidを構築
+    var textId = 'tempText' + buttonId.charAt(buttonId.length - 1);
+
+    // 対応するテキスト要素の内容を取得
+    var tempText = document.getElementById(textId).textContent;
+
+    // SpeechSynthesisUtterance オブジェクトを作成
+    const utterance = new SpeechSynthesisUtterance(tempText);
+    utterance.lang = "ja-JP"; // 言語設定を日本語に設定
+    utterance.rate = 0.7;
+    // テキストを読み上げる
+    window.speechSynthesis.speak(utterance);
+}
