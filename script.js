@@ -28,12 +28,13 @@ window.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
   // テキストエリアにイベントリスナーを設定
   const textarea = document.getElementById("sample");
-
+  var inrerjection = new Audio("kandoshiE.mp3");
   textarea.addEventListener("keyup", function(e) {
     // テキストエリアの値から最後の文字を取得
     let lastChar = textarea.value.slice(-1);
     let punctuationMarks = ['。', '、', '.', ',']; // 日本語の句点と読点、英語のピリオド
     let isPunctuation = punctuationMarks.includes(lastChar);
+    let atMarks = ['@', '＠'];
 
     // Enterがクリックされるかまたは最後の文字が句読点のいずれかである場合に発話する
     if (e.key === 'Enter' || isPunctuation) {
@@ -46,6 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // デフォルトのイベントをキャンセル（改行の挿入を防ぐ）
       e.preventDefault();
 
+    }
+
+    //@がクリックされたら感動詞を発する
+    if (atMarks.includes(e.key)) {
+      inrerjection.play().catch(function() {
+        console.error('音声再生に失敗しました。');
+      });
+      // 読み上げたテキストをクリア
+      textarea.value = "";
+      // デフォルトのイベントをキャンセル（改行の挿入を防ぐ）
+      e.preventDefault();
     }
   });
 });
@@ -98,7 +110,26 @@ document.addEventListener('DOMContentLoaded', function() {
     console.error("ボタンがDOMに存在しません。"); // ボタンが見つからない場合のエラーメッセージ
   }
 });
-//マジで俺髪の分け目がやばくて草(船山)
+
+//ここに感動詞の音声ファイルを発出できるコードを書こう
+// document.addEventListener('DOMContentLoaded',function(){
+//   var inrerjection = new Audio("kandoshiE.mp3");
+//   if(e.key === '@'){ //@の名前が知りたい
+//     inrerjection.play().catch(function(e) {
+//         console.error('音声再生に失敗しました。', e);
+//     });
+//   }
+// });
+
+//感動詞の音声ファイルを発出する
+// var inrerjection = new Audio("kandoshiE.mp3");
+// EventTarget.addEventListener("keydown", (e) => {
+//   if (e.KeyCode === 64) { //192…@
+//     inrerjection.play().catch(function(e) {
+//       console.error('音声再生に失敗しました。', e);
+//     });
+//   }
+// });
 
 
 //ログに残す文章数を取得する
@@ -167,36 +198,36 @@ function savetmp() {
 
 // 各ボタンに対してイベントリスナーを追加
 document.getElementById('speakerButton1').addEventListener('click', function(e) {
-    readText(e);
+  readText(e);
 });
 
 document.getElementById('speakerButton2').addEventListener('click', function(e) {
-    readText(e);
+  readText(e);
 });
 
 document.getElementById('speakerButton3').addEventListener('click', function(e) {
-    readText(e);
+  readText(e);
 });
 
 document.getElementById('speakerButton4').addEventListener('click', function(e) {
-    readText(e);
+  readText(e);
 });
 
 // テキストを読み上げる関数
 function readText(e) {
-    // クリックされたボタンのidを取得
-    var buttonId = e.target.id;
+  // クリックされたボタンのidを取得
+  var buttonId = e.target.id;
 
-    // 対応するテキスト要素のidを構築
-    var textId = 'tempText' + buttonId.charAt(buttonId.length - 1);
+  // 対応するテキスト要素のidを構築
+  var textId = 'tempText' + buttonId.charAt(buttonId.length - 1);
 
-    // 対応するテキスト要素の内容を取得
-    var tempText = document.getElementById(textId).textContent;
+  // 対応するテキスト要素の内容を取得
+  var tempText = document.getElementById(textId).textContent;
 
-    // SpeechSynthesisUtterance オブジェクトを作成
-    const utterance = new SpeechSynthesisUtterance(tempText);
-    utterance.lang = "ja-JP"; // 言語設定を日本語に設定
-    utterance.rate = 0.7;
-    // テキストを読み上げる
-    window.speechSynthesis.speak(utterance);
+  // SpeechSynthesisUtterance オブジェクトを作成
+  const utterance = new SpeechSynthesisUtterance(tempText);
+  utterance.lang = "ja-JP"; // 言語設定を日本語に設定
+  utterance.rate = 0.7;
+  // テキストを読み上げる
+  window.speechSynthesis.speak(utterance);
 }
