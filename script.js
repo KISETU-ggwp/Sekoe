@@ -111,26 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-//ここに感動詞の音声ファイルを発出できるコードを書こう
-// document.addEventListener('DOMContentLoaded',function(){
-//   var inrerjection = new Audio("kandoshiE.mp3");
-//   if(e.key === '@'){ //@の名前が知りたい
-//     inrerjection.play().catch(function(e) {
-//         console.error('音声再生に失敗しました。', e);
-//     });
-//   }
-// });
-
-//感動詞の音声ファイルを発出する
-// var inrerjection = new Audio("kandoshiE.mp3");
-// EventTarget.addEventListener("keydown", (e) => {
-//   if (e.KeyCode === 64) { //192…@
-//     inrerjection.play().catch(function(e) {
-//       console.error('音声再生に失敗しました。', e);
-//     });
-//   }
-// });
-
 
 //ログに残す文章数を取得する
 function clickBtn() {
@@ -164,10 +144,19 @@ function savetmp() {
   //ラジオボタンを生成して追加
   var radioButtonsContainer = document.getElementById("radioButtonsContainer");
   var radioButton = document.createElement("input");
-  radioButton.type = "radio";
+  radioButton.type = "radio";//変更Point
   radioButton.name = "template";
-  radioButton.value = templateText;
-  radioButtonsContainer.appendChild(radioButton);
+  
+  var formattedTemplate = templateText.replace(/<br>/g, "\n");
+  
+  var lebelElement = document.createElement("label");
+  HTMLLabelElement.innerHTML = formattedTemplate;
+
+  var containterElement = document.createElement("div");
+  containterElement.appendChild(radioButton);//変更するPoint
+  containterElement.appendChild(lebelElement);
+
+  radioButtonsContainer.appendChild(containterElement);
 
   //onchangeイベントハンドラを関数に直接割り当てる
   radioButton.onchange = tmpbutton;
@@ -178,15 +167,7 @@ function savetmp() {
   label.innerText = templateText;
   radioButtonsContainer.appendChild(label);
 
-  //削除ボタンを生成
-  var delButtonsContainer = document.getElementById("delButtonsContainer");
-  var delButton = document.createElement("input");
-  delButton.type = "button";
-  delButton.name = "delButton";
-  delButton.value = "X";
-  delButtonsContainer.appendChild(delButton);
-
-  //改行
+  //textareaとの重複を防ぐ改行
   var newline = document.createElement('br');
   radioButtonsContainer.appendChild(newline);
 
