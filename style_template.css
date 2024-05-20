@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+* {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+
+html {
+  background-color: #F1F1F4;
+  /* 周囲の背景色 */
+}
+
+body {
+  max-width: 1064px;
+  /*パディング分を考慮して*/
+  min-width: 1064px;
+  /*パディング分を考慮して*/
+  margin: auto;
+  padding: 40px;
+  background: #FFFFFF;
+
+}
+
+
+h1 {
+  font-weight: bold;
+  font-size: 2.625rem;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 1.625rem;
+}
+
+h4 {
+  font-weight: bold;
+  font-size: 1.375rem;
+}
+
+h5 {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+.box {
+  background: #fff;
+  /*背景色の指定*/
+  border: #ffffff 2px dashed;
+  /*境界線の指定*/
+  box-shadow: 0 0 0 6px #b7eaff;
+  /*境界線の外側の指定*/
+  padding: 10px;
+}
+
+.box p {
+  margin: 0;
+  padding: 0;
+}
+
+span {
+  color: rgb(255, 0, 255);
+  /*マゼンタ*/
+}
+
+/* 自動で入力欄サイズを変更する */
+/* 手動resizeなし */
+/* textarea {
+  resize: none;
+  /* 手動リサイズを禁止 */
+  min-height: 100px;
+  /* 高さの最小値を指定（任意） */
+  width: 50%;
+} */
+
+/*送信に関するUIとText量の量に対して*/
+#bms_send {
+  background-color: #eee;
+  /*タイムラインの色と同じにする*/
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  height: 48px;
+  padding: 4px;
+}
+
+#bms_send_btn {
+  width: 72px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 3em;
+  float: left;
+  /*bms_sendに対して左寄せ*/
+  color: #fff;
+  font-weight: bold;
+  background: #bcbcbc;
+  text-align: center;
+  /*文字をボタン中央に表示*/
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  /*角丸*/
+  box-sizing: border-box;
+  /*paddingとborderの要素の高さと幅の影響をなくす（要素に高さと幅を含める）*/
+}
+
+#bms_send_btn_voice {
+  width: 72px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 3em;
+  position: relative;
+  left: 550px;
+  top: -100px;
+  color: #fff;
+  font-weight: bold;
+  background: #bcbcbc;
+  text-align: center;
+  /*文字をボタン中央に表示*/
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  /*角丸*/
+  box-sizing: border-box;
+  /*paddingとborderの要素の高さと幅の影響をなくす（要素に高さと幅を含める）*/
+}
+
+#bms_send_btn:hover {
+  background: #13178E;
+  /*マウスポインタを当てた時にアクティブな色になる*/
+  cursor: pointer;
+  /*マウスポインタを当てた時に、カーソルが指の形になる*/
+}
+
+#bms_send_btn_voice:hover {
+  background: #13178E;
+  /*マウスポインタを当てた時にアクティブな色になる*/
+  cursor: pointer;
+  /*マウスポインタを当てた時に、カーソルが指の形になる*/
+}
+
+
+.circle-image {
+  border-radius: 50%;
+  /* この行で画像を円形にする */
+  width: 100px;
+  /* 画像の幅を指定 */
+  height: 100px;
+  /* 画像の高さを指定 */
+  object-fit: cover;
+  /* 画像のアスペクト比を保ちながらフィットさせる */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  background: #b7eaff;
+  /*背景色の指定*/
+  border: #ffffff 2px dashed;
+  /*境界線の指定*/
+  box-shadow: 0 0 0 6px #b7eaff;
+  /*境界線の外側の指定*/
+  padding: 10px;
+
+}
+
+.left,
+.center,
+.right {
+  flex: 1;
+}
+
+.circle-image {
+  border-radius: 50%;
+  width: 200px;
+  /* あるいは必要なサイズに */
+  height: 200px;
+  object-fit: cover;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  /* 右側のスペースを空けるためのスタイル */
+}
+
+.img{
+  float: left;
+}
