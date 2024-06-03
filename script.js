@@ -82,17 +82,45 @@ function speak(text) {
 }
 
 
+// //文字入力を検出する関数
+// const textarea = document.getElementById("sample");
+// textarea.addEventListener("keydown", function(event) {
+//   console.log("関数に入りました");
+//   console.log(event.isComposing);
+//   if (event.isComposing != true) { //isComposing: 入力未確定時に真となる論理値型の変数
+//     console.log("これからタイプ音を発出します");
+//     type_sound();
+//     console.log("タイプ音を発出しました");
+//   }
+//   console.log("ifブロックから出ました");
+// });
+
+//日本語入力対応版
 //文字入力を検出する関数
 const textarea = document.getElementById("sample");
-textarea.addEventListener("keydown", function(event) {
-  console.log("関数に入りました"); //ここまではOK
-  if (event.isComposing) { //isComposing: 入力未確定時に真となる論理値型の変数
+let isComposing = false;
+
+textarea.addEventListener("compositionstart", function() {
+  isComposing = true;
+  console.log("日本語入力が開始されました");
+});
+
+textarea.addEventListener("compositionend", function() {
+  isComposing = false;
+  console.log("日本語入力が確定されました");
+});
+
+textarea.addEventListener("input", function() {
+  console.log("関数に入りました");
+  console.log(isComposing);
+  if (isComposing) {
     console.log("これからタイプ音を発出します");
     type_sound();
     console.log("タイプ音を発出しました");
   }
   console.log("ifブロックから出ました");
 });
+
 
 
 //タイプ音を発出する関数
@@ -107,6 +135,7 @@ async function type_sound(){
       typeSound.currentTime = 0;
       console.log("タイプ音を停止しました");
     }, 5000);
+    console.log(typeSound.currentTime);
   } catch (error) {
     console.error('音声再生に失敗しました', error);
   }
