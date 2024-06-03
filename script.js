@@ -48,23 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
     }
-
-    //@がクリックされたら感動詞を発する
-    if (atMarks.includes(e.key)) {
-      inrerjection.play().catch(function() {
-        console.error('音声再生に失敗しました。');
-      });
-      // 読み上げたテキストをクリア
-      textarea.value = "";
-      // デフォルトのイベントをキャンセル（改行の挿入を防ぐ）
-      e.preventDefault();
-    }
   });
 });
 
 
 //表示する文字列を残す
 let current_text = ""; // 現在のテキストを蓄積する変数
+
 
 function saveChat(text) {
   let period_marks = ['。', '.']; // 日本語の句点と英語のピリオド
@@ -89,6 +79,37 @@ function speak(text) {
   utterance.rate = 0.7; // 読み上げの速さを0.7倍に設定
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
+}
+
+
+//文字入力を検出する関数
+const textarea = document.getElementById("sample");
+textarea.addEventListener("keydown", function(event) {
+  console.log("関数に入りました"); //ここまではOK
+  if (event.isComposing) { //isComposing: 入力未確定時に真となる論理値型の変数
+    console.log("これからタイプ音を発出します");
+    type_sound();
+    console.log("タイプ音を発出しました");
+  }
+  console.log("ifブロックから出ました");
+});
+
+
+//タイプ音を発出する関数
+async function type_sound(){
+  console.log("タイプ音を発出する関数に入りました");
+  const typeSound = new Audio("PC-Keyboard06-01(Mid).mp3");
+  try {
+    await typeSound.play();
+    console.log("タイプ音を発出しました");
+    setTimeout(() => {
+      typeSound.pause();
+      typeSound.currentTime = 0;
+      console.log("タイプ音を停止しました");
+    }, 5000);
+  } catch (error) {
+    console.error('音声再生に失敗しました', error);
+  }
 }
 
 
@@ -135,3 +156,6 @@ function tmpbutton(event) {
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
+
+
+
