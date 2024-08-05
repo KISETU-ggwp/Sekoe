@@ -28,13 +28,11 @@ window.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
   // テキストエリアにイベントリスナーを設定
   const textarea = document.getElementById("sample");
-  var inrerjection = new Audio("kandoshiE.mp3");
   textarea.addEventListener("keyup", function(e) {
     // テキストエリアの値から最後の文字を取得
     let lastChar = textarea.value.slice(-1);
     let punctuationMarks = ['。', '、', '.', ',']; // 日本語の句点と読点、英語のピリオド
     let isPunctuation = punctuationMarks.includes(lastChar);
-    let atMarks = ['@', '＠'];
 
     // Enterがクリックされるかまたは最後の文字が句読点のいずれかである場合に発話する
     if (e.key === 'Enter' || isPunctuation) {
@@ -46,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
       textarea.value = "";
       // デフォルトのイベントをキャンセル（改行の挿入を防ぐ）
       e.preventDefault();
-
     }
   });
 });
@@ -82,19 +79,6 @@ function speak(text) {
 }
 
 
-// //文字入力を検出する関数
-// const textarea = document.getElementById("sample");
-// textarea.addEventListener("keydown", function(event) {
-//   console.log("関数に入りました");
-//   console.log(event.isComposing);
-//   if (event.isComposing != true) { //isComposing: 入力未確定時に真となる論理値型の変数
-//     console.log("これからタイプ音を発出します");
-//     type_sound();
-//     console.log("タイプ音を発出しました");
-//   }
-//   console.log("ifブロックから出ました");
-// });
-
 //日本語入力対応版
 //文字入力を検出する関数
 const textarea = document.getElementById("sample");
@@ -102,40 +86,26 @@ let isComposing = false;
 
 textarea.addEventListener("compositionstart", function() {
   isComposing = true;
-  console.log("日本語入力が開始されました");
 });
 
 textarea.addEventListener("compositionend", function() {
   isComposing = false;
-  console.log("日本語入力が確定されました");
 });
 
 textarea.addEventListener("input", function() {
-  console.log("関数に入りました");
-  console.log(isComposing);
   if (isComposing) {
-    console.log("これからタイプ音を発出します");
     type_sound();
-    console.log("タイプ音を発出しました");
   }
-  console.log("ifブロックから出ました");
 });
 
 
 
 //タイプ音を発出する関数
 async function type_sound(){
-  console.log("タイプ音を発出する関数に入りました");
-  const typeSound = new Audio("PC-Keyboard06-01(Mid).mp3");
+  const typeSound = new Audio("Enter_sound.mp3"); //エンターキー音
   try {
     await typeSound.play();
-    console.log("タイプ音を発出しました");
-    setTimeout(() => {
-      typeSound.pause();
-      typeSound.currentTime = 0;
-      console.log("タイプ音を停止しました");
-    }, 5000);
-    console.log(typeSound.currentTime);
+    // typeSound.play();
   } catch (error) {
     console.error('音声再生に失敗しました', error);
   }
@@ -185,6 +155,3 @@ function tmpbutton(event) {
   // テキストを読み上げる
   window.speechSynthesis.speak(utterance);
 }
-
-
-
