@@ -51,16 +51,22 @@
 ## 8. 予備実験
  Webアプリが実際にどの程度役立っているのかを調べた．
 
+![yobi-zikken01](/image/yobi-zikken-01.png)
+
+![yobi-zikken01](/image/yobi-zikken-02.png)
  
- 
+![yobi-zikken01](/image/yobi-zikken-03.png)
+
 
 ## 9. スクリーンショットや動作例
-以下にシステムの動作例やスクリーンショットを示す．
-
-### 📸 スクリーンショット
-![システムのスクリーンショット](画像のURL)
+以下にシステムの動作例を示す．
 
 ### 🎥 動作例
-[デモ動画のリンク] または [GIFアニメーションのリンク]
+
+https://github.com/user-attachments/assets/a13f0fd8-6ec5-4afc-9efd-b3de69528967
 
 ---
+ここまでお読みいただきありがとうございます．
+
+予備実験をより細かくみたものが論文として発表されますのでその際にまた更新します．
+
